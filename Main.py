@@ -3,10 +3,12 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from matplotlib import gridspec
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, accuracy_score, precision_score, recall_score, f1_score, \
+from sklearn.metrics import classification_report, precision_score, recall_score, f1_score, \
     matthews_corrcoef, confusion_matrix
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
 
 # Reading our credit card data set
 data = pd.read_csv('creditcard.csv')
@@ -30,9 +32,7 @@ Y_data = Y.values
 # Splitting our data for training and testing
 X_train, X_test, Y_train, Y_test = train_test_split(X_data, Y_data, test_size=0.2, random_state=42)
 # Building a MLP model
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.svm import SVC
+
 
 clf = make_pipeline(StandardScaler(), SVC(gamma='auto'))
 clf.fit(X_train, Y_train)
